@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+    java_app:
+        build: ./java_app
+        depends_on:
+            - cplex
+    cplex:
+        build: ./cplex
