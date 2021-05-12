@@ -9,8 +9,8 @@ IBM ILOG CPLEX deployment with Docker. The [demo Java code](src/HelloCplex.java)
 
 ```
 cd src
-javac -cp .:/Applications/CPLEX_Studio128/cplex/lib/cplex.jar HelloCplex.java
-java -Djava.library.path=/Applications/CPLEX_Studio128/cplex/bin/x86-64_osx -cp .:/Applications/CPLEX_Studio128/cplex/lib/cplex.jar HelloCplex
+javac -cp .:/Applications/CPLEX_Studio201/cplex/lib/cplex.jar HelloCplex.java
+java -Djava.library.path=/Applications/CPLEX_Studio201/cplex/bin/x86-64_osx -cp .:/Applications/CPLEX_Studio201/cplex/lib/cplex.jar HelloCplex
 
 Press CTRL+C to terminate
 ```
@@ -51,13 +51,13 @@ Dual of cons03: 0.0014999999999999996
 
 - The docker container image will be Debian based [openjdk:8-jre](https://hub.docker.com/_/openjdk/).
 
-- Copy the downloaded CPLEX Linux installer `cplex_studio128.linux-x86-64.bin` to the same location with `cplex/Dockerfile`.
+- Copy the downloaded CPLEX Linux installer `ILOG_COS_20.10_LINUX_X86_64.bin` to the same location with `cplex/Dockerfile`.
 
   ```
   tree cplex
   cplex
   ├── Dockerfile
-  ├── cplex_studio128.linux-x86-64.bin
+  ├── ILOG_COS_20.10_LINUX_X86_64.bin
   └── response.properties  
   ```
 
@@ -65,27 +65,27 @@ Dual of cons03: 0.0014999999999999996
   
   ```
   cd cplex
-  docker image build -t cplex:12.8 -t cplex:12.8.0 .
+  docker image build -t cplex:20.1 -t cplex:20.1.0 .
   docker images|grep cplex
-  cplex    12.8       3b473e7d9ec3        About a minute ago   3.43GB
-  cplex    12.8.0     3b473e7d9ec3        About a minute ago   3.43GB
+  cplex    20.1       3b473e7d9ec3        About a minute ago   3.43GB
+  cplex    20.1.0     3b473e7d9ec3        About a minute ago   3.43GB
   ```
 
 - _(Optional)_ Publish to private docker image registry:
 
   ```
-  docker tag cplex:12.8 docker-image-registry.com/namespace/cplex:12.8
-  docker tag cplex:12.8.0 docker-image-registry.com/namespace/cplex:12.8.0
+  docker tag cplex:20.1 docker-image-registry.com/namespace/cplex:20.1
+  docker tag cplex:20.1.0 docker-image-registry.com/namespace/cplex:20.1.0
   
-  docker push docker-image-registry.com/namespace/cplex:12.8
-  docker push docker-image-registry.com/namespace/cplex:12.8.0
+  docker push docker-image-registry.com/namespace/cplex:20.1
+  docker push docker-image-registry.com/namespace/cplex:20.1.0
   ```
 
 #### Build Sample Java App
 
 - Make sure to compile the `HelloCplex.java`. This is on macOS. Otherwise adjust the classpath.
     ```
-    javac -cp .:/Applications/CPLEX_Studio128/cplex/lib/cplex.jar src/HelloCplex.java
+    javac -cp .:/Applications/CPLEX_Studio201/cplex/lib/cplex.jar src/HelloCplex.java
     ```
 
 - Once ready, build the docker image.
@@ -103,11 +103,11 @@ Dual of cons03: 0.0014999999999999996
     docker images dev_tusk
     docker exec -it tusk bash
     ls -l
-    ls -l /opt/ibm/ILOG/CPLEX_Studio128/
-    ls -l /opt/ibm/ILOG/CPLEX_Studio128/cplex/lib/
-    ls -l /opt/ibm/ILOG/CPLEX_Studio128/cplex/bin/x86-64_linux/
+    ls -l /opt/ibm/ILOG/CPLEX_Studio201/
+    ls -l /opt/ibm/ILOG/CPLEX_Studio201/cplex/lib/
+    ls -l /opt/ibm/ILOG/CPLEX_Studio201/cplex/bin/x86-64_linux/
     
-    java -Djava.library.path=/opt/ibm/ILOG/CPLEX_Studio128/cplex/bin/x86-64_linux -cp .:/opt/ibm/ILOG/CPLEX_Studio128/cplex/lib/cplex.jar HelloCplex
+    java -Djava.library.path=/opt/ibm/ILOG/CPLEX_Studio201/cplex/bin/x86-64_linux -cp .:/opt/ibm/ILOG/CPLEX_Studio201/cplex/lib/cplex.jar HelloCplex
     
     CTRL+C to terminate
     
