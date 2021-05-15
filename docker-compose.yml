@@ -7,3 +7,8 @@ services:
             - cplex
     cplex:
         build: ./cplex
+
+    docplex:
+        build: ./docplex
+        depends_on: 
+            - cplex
