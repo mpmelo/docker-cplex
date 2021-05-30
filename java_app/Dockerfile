@@ -1,4 +1,4 @@
-FROM docker-cplex_cplex
+FROM d_cplex_cplex
 
 COPY src/ /app/
 
